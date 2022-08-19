@@ -39,10 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+
+    'django_apscheduler',
+
     'news',
     'django_filters',
     'sign',
     'protect',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -133,12 +137,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/news/'
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+
+APSCHEDULER_RUN_NOW_TIMEOUT = 25
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -156,3 +166,16 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
 
+EMAIL_HOST = 'smtp.inbox.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'lady.nadya20'
+EMAIL_HOST_PASSWORD = 'butakova90BNN'
+EMAIL_USE_SSL = True
+
+SERVER_EMAIL = 'lady.nadya20@mail.ru'
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + "@inbox.ru"
+
+ADMINS = [
+    ('Надежда', 'but.nadya777@yandex.ru'),
+]
