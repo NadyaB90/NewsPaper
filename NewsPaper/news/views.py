@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
@@ -32,6 +33,13 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'post.html'
     context_object_name = 'post'
+
+    def get_object(self, *args, **kwargs):
+        obj = cache.get(f'product-{self.kwargs["pk"]}',
+                        None)
+        if not obj:
+            obj = super().get_object(queryset=self.queryset)
+            cache.set(f'product-{self.kwargs["pk"]}', obj)
 
 
 class SearchList(ListView):

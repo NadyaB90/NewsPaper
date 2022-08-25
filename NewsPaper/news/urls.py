@@ -1,7 +1,9 @@
-from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
+from django.views.decorators.cache import cache_page
+
 from .views import PostsList, PostDetail, SearchList, PostCreateView, PostUpdateView, PostDeleteView, \
     CategorySubscribeView, subscribe_category
+
 
 urlpatterns = [
     path('', PostsList.as_view()),

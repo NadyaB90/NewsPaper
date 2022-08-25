@@ -1,7 +1,7 @@
+from django.core import cache
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
-from django.urls import reverse
 
 
 class Author(models.Model):
@@ -65,6 +65,10 @@ class Post(models.Model):
     def get_absolute_url(self):
         return f'/news/{self.id}'
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # сначала вызываем метод родителя, чтобы объект сохранился
+        cache.delete(f'post-{self.pk}')  # затем удаляем его из кэша, чтобы сбросить его
+
     def message_subscriber(self):
         return f'Новая статья - "{self.title}" в разделе "{self.post_category.first()}" '
 
@@ -72,6 +76,12 @@ class Post(models.Model):
 class PostCategory(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.category}'
+
+    def get_absolute_url(self):
+        return f'/news/category/{self.id}'
 
 
 class Comment(models.Model):
