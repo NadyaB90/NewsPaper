@@ -41,6 +41,8 @@ class PostDetail(DetailView):
             obj = super().get_object(queryset=self.queryset)
             cache.set(f'product-{self.kwargs["pk"]}', obj)
 
+            return obj
+
 
 class SearchList(ListView):
     model = Post

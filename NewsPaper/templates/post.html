@@ -13,24 +13,19 @@ Post
     {% if post %}
         <table>
             <tr>
-                <tr><h3>
-                    {{ post.title }}
-                </h3></tr>
-                <tr><p><i>
-                    {{ post.created_date|date:'d M Y H:i' }}
-                </i></p></tr>
-                <tr>
-                    {{ post.text|censor }}
-                </tr>
+                <tr>{{ post.title }}</tr>
+                <tr>{{ post.created_date|date:'d M Y H:i' }}</tr>
+                <tr>{{ post.text|censor }}</tr>
 <br>
             <a href="{%url 'post_delete' post.id%}" class="btn btn-danger">Удалить</a>
 <a href="{%url 'post_update' post.id%}" class="btn btn-info">Редактировать</a>
 
-            </tr>
+        </table>
+
             <td>
     <a class="nav-link" href="subscribe/">Оформить подписку на подобные новости </a>
-</td>
-        </table>
+            </td>
+
     {% else %}
 
         <h2>Новостей и публикаций нет!</h2>
