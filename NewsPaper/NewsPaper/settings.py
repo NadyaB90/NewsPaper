@@ -175,16 +175,16 @@ ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
 
 EMAIL_HOST = 'smtp.inbox.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'lady.nadya20'
-EMAIL_HOST_PASSWORD = 'butakova90BNN'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_SSL = True
 
-SERVER_EMAIL = 'lady.nadya20@mail.ru'
+SERVER_EMAIL = ''
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + "@inbox.ru"
 
 ADMINS = [
-    ('Надежда', 'but.nadya777@yandex.ru'),
+    (''),
 ]
 
 CELERY_BROKER_URL = 'redis://localhost:6379'
